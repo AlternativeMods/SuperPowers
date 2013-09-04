@@ -2,8 +2,7 @@ build
 .gradle
 minecraft
 runtime
-saves
-recoursepacks
+out
 SuperPowers.iml
 SuperPowers.ipr
 SuperPowers.iws
