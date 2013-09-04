@@ -1,4 +1,4 @@
-package handlers;
+package jkmau5.superpowers.handlers;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -32,12 +32,12 @@ public class TickHandler implements ITickHandler {
 
     @Override
     public void tickEnd(EnumSet<TickType> type, Object... tickData) {
-        if(tickCount++ >= 1)
+        if (tickCount++ >= 1)
             tickCount = 0;
         else
             return;
 
-        if(player == null)
+        if (player == null)
             player = Minecraft.getMinecraft().thePlayer;
 
 
@@ -46,12 +46,11 @@ public class TickHandler implements ITickHandler {
     }
 
     public void superSprint() {
-        if(player.isSprinting()) {
+        if (player.isSprinting()) {
             runSpeed += 0.075;
-            if(runSpeed > 3)
+            if (runSpeed > 3)
                 runSpeed = 3;
-        }
-        else {
+        } else {
             runSpeed = 0.98D;
         }
 
@@ -60,9 +59,9 @@ public class TickHandler implements ITickHandler {
 
         System.out.println(player.motionX + " _ " + player.motionZ);
 
-        if(player.motionX > 3 || player.motionX < -3)
+        if (player.motionX > 3 || player.motionX < -3)
             player.motionX = oldMotionX;
-        if(player.motionZ > 3 || player.motionZ < -3)
+        if (player.motionZ > 3 || player.motionZ < -3)
             player.motionZ = oldMotionZ;
 
         oldMotionX = player.motionX;
@@ -70,15 +69,14 @@ public class TickHandler implements ITickHandler {
     }
 
     public void superJump() {
-        if(Minecraft.getMinecraft().gameSettings.keyBindJump.pressed) {
+        if (Minecraft.getMinecraft().gameSettings.keyBindJump.pressed) {
             shortPress = true;
 
             jumpModifier += 0.075;
-            if(jumpModifier > 2.25)
+            if (jumpModifier > 2.25)
                 jumpModifier = 2.25;
-        }
-        else {
-            if(shortPress == true && jumpModifier < 0.5)
+        } else {
+            if (shortPress == true && jumpModifier < 0.5)
                 jumpModifier = 0.5;
             shortPress = false;
             player.motionY += jumpModifier;

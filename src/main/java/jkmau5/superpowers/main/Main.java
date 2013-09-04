@@ -1,12 +1,12 @@
-package main;
+package jkmau5.superpowers.main;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
-import handlers.SPEventHandler;
-import handlers.TickHandler;
+import jkmau5.superpowers.handlers.SPEventHandler;
+import jkmau5.superpowers.handlers.TickHandler;
 import net.minecraftforge.common.MinecraftForge;
 
 /**
@@ -16,7 +16,7 @@ import net.minecraftforge.common.MinecraftForge;
  * You are not allowed to change this code,
  * nor publish it without my permission.
  */
-@Mod(modid="SuperPowers", name="Super Powers", version="ALPHA 0.1")
+@Mod(modid = "SuperPowers", name = "Super Powers", version = "ALPHA 0.1")
 public class Main {
 
 
@@ -26,7 +26,7 @@ public class Main {
     }
 
     private void initClient() {
-        if(FMLCommonHandler.instance().getEffectiveSide() != Side.CLIENT)
+        if (FMLCommonHandler.instance().getEffectiveSide() != Side.CLIENT)
             return;
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
         MinecraftForge.EVENT_BUS.register(new SPEventHandler());
