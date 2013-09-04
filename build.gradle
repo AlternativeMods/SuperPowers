@@ -8,11 +8,10 @@ buildscript{
 }
 
 apply plugin: 'gmcp'
-apply plugin: 'scala'
 
-group = 'jk_5.mods.industrialfarms'
+group = 'jkmau5.superpowers'
 version = '0.1'
-archivesBaseName = 'IndustrialFarms'
+archivesBaseName = 'SuperPowers'
 
 minecraft{
     minecraftVersion = '1.6.2'
