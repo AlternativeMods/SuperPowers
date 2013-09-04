@@ -24,6 +24,7 @@ public class TickHandler implements ITickHandler {
     double oldMotionZ = 0;
 
     double jumpModifier = 0;
+    boolean shortPress = false;
 
     @Override
     public void tickStart(EnumSet<TickType> type, Object... tickData) {
@@ -57,28 +58,29 @@ public class TickHandler implements ITickHandler {
         player.motionX *= runSpeed;
         player.motionZ *= runSpeed;
 
-        if(!player.onGround) {
-            if(player.motionX > 1 || player.motionX < -1)
-                player.motionX = oldMotionX;
-            if(player.motionZ > 1 || player.motionZ < -1)
-                player.motionZ = oldMotionZ;
-        }
+        System.out.println(player.motionX + " _ " + player.motionZ);
+
+        if(player.motionX > 3 || player.motionX < -3)
+            player.motionX = oldMotionX;
+        if(player.motionZ > 3 || player.motionZ < -3)
+            player.motionZ = oldMotionZ;
 
         oldMotionX = player.motionX;
         oldMotionZ = player.motionZ;
     }
 
     public void superJump() {
-        System.out.println(jumpModifier + " _ ");
         if(Minecraft.getMinecraft().gameSettings.keyBindJump.pressed) {
-            if(jumpModifier == 0)
-                jumpModifier = 0.5;
+            shortPress = true;
 
             jumpModifier += 0.075;
             if(jumpModifier > 2.25)
                 jumpModifier = 2.25;
         }
         else {
+            if(shortPress == true && jumpModifier < 0.5)
+                jumpModifier = 0.5;
+            shortPress = false;
             player.motionY += jumpModifier;
             jumpModifier = 0;
         }
