@@ -21,6 +21,7 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import jkmau5.superpowers.config.ConfigFile;
 import jkmau5.superpowers.proxy.IProxy;
 
 /**
@@ -34,13 +35,19 @@ public class SuperPowers {
     @SidedProxy(modId = Constants.MOD_ID, clientSide = "jkmau5.superpowers.proxy.ProxyClient", serverSide = "jkmau5.superpowers.proxy.ProxyServer")
     private static IProxy sidedProxy;
 
+    private ConfigFile config;
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-
+        this.config = new ConfigFile(event.getSuggestedConfigurationFile()).setComment("Main SuperPowers config file");
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         sidedProxy.registerEvents();
+    }
+
+    public ConfigFile getConfig(){
+        return this.config;
     }
 }
