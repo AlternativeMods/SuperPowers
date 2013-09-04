@@ -4,8 +4,8 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.ChatMessageComponent;
 import net.minecraft.util.DamageSource;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
@@ -36,5 +36,12 @@ public class EventHandlerClient {
             return;
         if (a.entity instanceof EntityPlayer)
             a.setCanceled(true);
+    }
+
+    @ForgeSubscribe
+    public void onRenderOverlay(RenderGameOverlayEvent.Post event) {
+        if (event.type == RenderGameOverlayEvent.ElementType.ALL) {
+            HudRenderer.renderOverlay(event.partialTicks, event.resolution);
+        }
     }
 }
