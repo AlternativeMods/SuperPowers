@@ -1,0 +1,28 @@
+buildscript{
+    repositories{
+        mavenCentral()
+    }
+    dependencies{
+        classpath 'com.github.abrarsyed.gmcp:GMCP:0.7.3'
+    }
+}
+
+apply plugin: 'gmcp'
+apply plugin: 'scala'
+
+group = 'jk_5.mods.industrialfarms'
+version = '0.1'
+archivesBaseName = 'IndustrialFarms'
+
+minecraft{
+    minecraftVersion = '1.6.2'
+}
+dependencies {
+    testCompile 'junit:junit:[4,)'
+}
+
+test {
+    testLogging {
+        events 'started', 'passed'
+    }
+}
