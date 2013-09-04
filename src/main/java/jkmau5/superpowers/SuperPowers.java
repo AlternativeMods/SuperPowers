@@ -23,6 +23,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import jkmau5.superpowers.config.ConfigFile;
 import jkmau5.superpowers.proxy.IProxy;
+import jkmau5.superpowers.utils.SPLogger;
 
 /**
  * Author: Lordmau5
@@ -39,6 +40,7 @@ public class SuperPowers {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+        SPLogger.info("Starting up SuperPowers, version %s (build %d)", SPVersion.VERSION, SPVersion.BUILD);
         this.config = new ConfigFile(event.getSuggestedConfigurationFile()).setComment("Main SuperPowers config file");
     }
 
