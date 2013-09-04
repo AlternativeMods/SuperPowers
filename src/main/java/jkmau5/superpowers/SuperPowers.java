@@ -33,7 +33,7 @@ import jkmau5.superpowers.proxy.IProxy;
 public class SuperPowers {
 
     @SidedProxy(modId = Constants.MOD_ID, clientSide = "jkmau5.superpowers.proxy.ProxyClient", serverSide = "jkmau5.superpowers.proxy.ProxyServer")
-    private static IProxy sidedProxy;
+    public static IProxy sidedProxy;
 
     private ConfigFile config;
 
@@ -47,7 +47,7 @@ public class SuperPowers {
         sidedProxy.registerEvents();
     }
 
-    public ConfigFile getConfig(){
+    public ConfigFile getConfig() {
         return this.config;
     }
 }
