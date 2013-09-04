@@ -1,4 +1,4 @@
-package jkmau5.superpowers.handlers;
+package jkmau5.superpowers.client;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -10,13 +10,11 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 
 /**
- * Author: Lordmau5
- * Date: 04.09.13
- * Time: 11:29
- * You are not allowed to change this code,
- * nor publish it without my permission.
+ * TODO: Edit description
+ *
+ * @author jk-5
  */
-public class SPEventHandler {
+public class EventHandlerClient {
 
     @ForgeSubscribe
     public void onPlayerJump(LivingEvent.LivingJumpEvent j) {

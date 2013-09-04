@@ -1,4 +1,4 @@
-package jkmau5.superpowers.handlers;
+package jkmau5.superpowers.client;
 
 import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
@@ -8,13 +8,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import java.util.EnumSet;
 
 /**
- * Author: Lordmau5
- * Date: 03.09.13
- * Time: 22:46
- * You are not allowed to change this code,
- * nor publish it without my permission.
+ * TODO: Edit description
+ *
+ * @author jk-5
  */
-public class TickHandler implements ITickHandler {
+public class TickHandlerClient implements ITickHandler {
 
     EntityPlayer player;
     int tickCount = 0;
@@ -91,6 +89,6 @@ public class TickHandler implements ITickHandler {
 
     @Override
     public String getLabel() {
-        return "superPowersTHandler";
+        return this.getClass().getName();
     }
 }
