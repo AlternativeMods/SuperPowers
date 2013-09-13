@@ -40,7 +40,7 @@ public class SuperPowers {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        SPLogger.info("Starting up SuperPowers, version %s (build %d)", SPVersion.VERSION, SPVersion.BUILD);
+        SPLogger.info("Starting up SuperPowers, version %s", SPVersion.VERSION);
         this.config = new ConfigFile(event.getSuggestedConfigurationFile()).setComment("Main SuperPowers config file");
     }
 

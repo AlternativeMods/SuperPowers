@@ -10,7 +10,7 @@ buildscript{
 apply plugin: 'gmcp'
 
 group = 'jkmau5.superpowers'
-version = '0.1'
+version = '0.1-SNAPSHOT'
 archivesBaseName = 'SuperPowers'
 
 minecraft{
@@ -23,5 +23,14 @@ dependencies {
 test {
     testLogging {
         events 'started', 'passed'
+    }
+}
+
+processResources {
+    exclude '**/*.psd'
+    exclude '**/*.txt'
+    eachFile { file ->
+        if (!file.getPath().endsWith('png'))
+            expand 'version':project.version
     }
 }
