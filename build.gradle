@@ -1,9 +1,10 @@
 buildscript{
     repositories{
         mavenCentral()
+        maven {url 'https://oss.sonatype.org/content/repositories/snapshots'}
     }
     dependencies{
-        classpath 'com.github.abrarsyed.gmcp:GMCP:0.7.3'
+        classpath 'com.github.abrarsyed.gmcp:GMCP:0.7.4-SNAPSHOT'
     }
 }
 
@@ -26,9 +27,15 @@ test {
     }
 }
 
+jar {
+    appendix = 'universal'
+    manifest {
+        attributes 'MCVersion' : project.minecraft.minecraftVersion
+        attributes 'Version' : project.version
+    }
+}
+
 processResources {
-    exclude '**/*.psd'
-    exclude '**/*.txt'
     eachFile { file ->
         if (!file.getPath().endsWith('png'))
             expand 'version':project.version
