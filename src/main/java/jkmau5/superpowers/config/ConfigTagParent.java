@@ -1,3 +1,19 @@
+/*
+ * Copyright 2013 jk-5 and Lordmau5
+ *
+ * jk-5 and Lordmau5 License this file to you under the LGPL v3 License (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at:
+ *
+ * http://www.gnu.org/licenses/lgpl.html
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License
+ */
+
 package jkmau5.superpowers.config;
 
 import java.io.BufferedReader;
@@ -6,6 +22,14 @@ import java.io.PrintWriter;
 import java.util.*;
 import java.util.Map.Entry;
 
+/**
+ *  My own config library, because is is 1000x better than forge's one
+ *
+ *  Base class for all config stuff. It handles things like sorting the tags or getting/setting the comments or default values
+ *
+ *  @author jk-5
+ */
+@SuppressWarnings("unused")
 public abstract class ConfigTagParent {
 
     public static class TagOrderComparator implements Comparator<ConfigTag> {
@@ -19,10 +43,10 @@ public abstract class ConfigTagParent {
             if (o1.position != o2.position)
                 return compareInt(o1.position, o2.position);
             if (o1.brace != o2.brace)
-                return o1.brace ? 1 : -1;//braced one goes after
+                return o1.brace ? 1 : -1; //braced one goes after
             switch (sortMode) {
                 case 1:
-                    if (o1.value == o2.value)
+                    if (o1.value.equals(o2.value))
                         return 0;
                     if (o1.value == null)
                         return 1;
@@ -140,10 +164,12 @@ public abstract class ConfigTagParent {
         childtags.put(tag.name, tag);
     }
 
+    @SuppressWarnings("unchecked")
     public <T extends ConfigTag> ArrayList<T> getSortedTagList() {
         ArrayList<T> taglist = new ArrayList<T>(childtags.size());
-        for (Entry<String, ConfigTag> tag : childtags.entrySet())
+        for (Entry<String, ConfigTag> tag : childtags.entrySet()){
             taglist.add((T) tag.getValue());
+        }
 
         Collections.sort(taglist, new TagOrderComparator(sortMode));
         return taglist;
@@ -195,9 +221,9 @@ public abstract class ConfigTagParent {
 
     public void writeComment(PrintWriter writer, int tabs) {
         if (comment != null && !comment.equals("")) {
-            String[] comments = comment.split("\n");
-            for (int i = 0; i < comments.length; i++)
-                ConfigFile.writeLine(writer, "#" + comments[i], tabs);
+            for (String s : comment.split("\n")){
+                ConfigFile.writeLine(writer, "#" + s, tabs);
+            }
         }
     }
 }

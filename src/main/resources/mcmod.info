@@ -1,0 +1,17 @@
+[{
+    "modid": "SuperPowers",
+    "name": "SuperPowers",
+    "description": "Bringing saints rows 4's special Powers to Minecraft",
+    "version": "${version}",
+    "url": "http://github.com/jk-5/SuperPowers/",
+    "updateUrl": "",
+    "authorList": [
+        "jk-5",
+        "Lordmau5"
+    ],
+    "credits": "Searge, cpw and LexManos for their awesome work on MCP, FML and Forge. And also to everybody in the community, playing this mod",
+    "logoFile": "/assets/ee3/textures/logo/logo.png",
+    "screenshots": [],
+    "parent":"",
+    "dependencies": []
+}]

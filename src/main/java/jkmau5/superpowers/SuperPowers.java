@@ -21,35 +21,39 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
 import jkmau5.superpowers.config.ConfigFile;
-import jkmau5.superpowers.proxy.IProxy;
+import jkmau5.superpowers.server.ProxyCommon;
 import jkmau5.superpowers.utils.SPLogger;
+import jkmau5.superpowers.version.VersionChecker;
+import lombok.Getter;
 
-/**
- * Author: Lordmau5
- * Date: 03.09.13
- * Time: 22:44
- */
-@Mod(modid = Constants.MOD_ID, name = "Super Powers", version = SPVersion.VERSION)
+@Mod(modid = "SuperPowers", useMetadata = true, dependencies = "required-after:Forge@[9.11.1.942,)")
+@NetworkMod(clientSideRequired = true)
 public class SuperPowers {
 
-    @SidedProxy(modId = Constants.MOD_ID, clientSide = "jkmau5.superpowers.proxy.ProxyClient", serverSide = "jkmau5.superpowers.proxy.ProxyServer")
-    public static IProxy sidedProxy;
+    @Getter
+    @Mod.Instance("SuperPowers")
+    private static SuperPowers instance;
 
-    private ConfigFile config;
+    @SidedProxy(modId = "SuperPowers", clientSide = "jkmau5.superpowers.client.ProxyClient", serverSide = "jkmau5.superpowers.server.ProxyCommon")
+    public static ProxyCommon proxy;
+
+    @Getter private ConfigFile config;
+    @Getter private VersionChecker versionChecker;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        SPLogger.info("Starting up SuperPowers, version %s", SPVersion.VERSION);
         this.config = new ConfigFile(event.getSuggestedConfigurationFile()).setComment("Main SuperPowers config file");
+        this.versionChecker = new VersionChecker();
+        this.versionChecker.init();
+        SPLogger.info("Starting up SuperPowers, version %s build %d", this.versionChecker.getCurrentVersion().version, this.versionChecker.getCurrentVersion().build);
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-        sidedProxy.registerEvents();
-    }
-
-    public ConfigFile getConfig() {
-        return this.config;
+        proxy.registerEvents();
+        
+        this.versionChecker.checkRemoteVersion();
     }
 }
